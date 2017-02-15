@@ -1,0 +1,37 @@
+resources:
+- name: git-assets
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/azwickey-pivotal/concourse-pipeline-samples
+- name: cloudfoundry
+  type: cf
+  source:
+    api: {{cf-api}}
+    skip_cert_check: true
+    organization: {{cf-organization}}
+    username: {{cf-username}}
+    password: {{cf-password}}
+    space: {{cf-space}}
+
+jobs:
+- name: unit-test
+  public: true
+  plan:
+  - get: git-assets
+    trigger: true
+  - task: mvn-test
+    file: git-assets/boot-sample/ci/tasks/mvn-test.yml
+- name: deploy-cf
+  public: true
+  plan:
+  - get: git-assets
+    trigger: true
+    passed:
+      - unit-test
+  - task: mvn-package
+    file: git-assets/boot-sample/ci/tasks/mvn-package.yml
+  - put: cloudfoundry
+    params:
+      manifest: git-assets/boot-sample/manifest.yml
+      path: app-output/concourse-demo.jar

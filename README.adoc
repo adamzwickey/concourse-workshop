@@ -9,4 +9,8 @@ Presentation ::
  * Intro to Concourse: link:presentation/concourse.pptx[_Concourse Intro_]
 
 Labs::
- * XXXXX: link:presentations/lab.pptx[_lab..._]
+ * link:lab.adoc[_World’s simplest Pipeline_]
+ * link:lab.adoc[_1st Job on Concourse server_]
+ * link:lab.adoc[_Introduce Git resource_]
+ * link:lab.adoc[_Link multiple jobs_]
+ * link:lab.adoc[_Push app to CF_]
