@@ -6,7 +6,7 @@ This 2 hour hands-on session will provide developers and operators with hands on
 == Content
 
 Presentation ::
- * Intro to Concourse: link:presentations/concourse.pptx[_Concourse Intro_]
+ * Intro to Concourse: link:presentation/concourse.pptx[_Concourse Intro_]
 
 Labs::
  * XXXXX: link:presentations/lab.pptx[_lab..._]
