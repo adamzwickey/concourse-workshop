@@ -12,7 +12,7 @@ jobs:
   - get: git-assets
     trigger: true
   - task: mvn-test
-    file: git-assets/concourse-workshop/ci/tasks/mvn-test.yml
+    file: git-assets/ci/tasks/mvn-test.yml
 - name: deploy
   public: true
   plan:
@@ -21,4 +21,4 @@ jobs:
     passed:
       - unit-test
   - task: mvn-package
-    file: git-assets/concourse-workshop/ci/tasks/mvn-package.yml
+    file: git-assets/ci/tasks/mvn-package.yml
