@@ -1,0 +1,23 @@
+= Lab 01
+
+== World’s simplest Concourse Task
+
+. Using a text editor (of choice), create the file pipeline.yml:
++
+[source, bash]
+---------------------------------------------------------------------
+platform: linux
+image_resource:
+  type: docker-image
+  source: {repository: ubuntu}
+run:
+  path: echo
+  args: ["Hello, My first pipeline!"]
+---------------------------------------------------------------------
+
+. To execute the concourse task on your local workstation execute the following fly command:
++
+[source,bash]
+---------------------------------------------------------------------
+$ fly -t gcp execute -c pipeline.yml
+---------------------------------------------------------------------
