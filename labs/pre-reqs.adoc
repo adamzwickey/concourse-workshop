@@ -35,3 +35,16 @@ password:
 
 target saved
 ---------------------------------------------------------------------
+
+== Create a GIT repository to hold your concourse pipeline and artifacts
+
+. Fork this git repository:  https://github.com/azwickey-pivotal/concourse-workshop
+
+. Clone this repository to your local desktop
++
+[source,bash]
+---------------------------------------------------------------------
+$ git clone <YOUR-GIT-URL>
+---------------------------------------------------------------------
+
+. In your terminal window change directories to the root of your cloned git repo.  We'll use this location as a base for most our commands in the workshop

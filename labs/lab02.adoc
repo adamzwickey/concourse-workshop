@@ -20,7 +20,7 @@ jobs:
         args: ["Hello, My first pipeline!"]
 ---------------------------------------------------------------------
 
-. To deploy this pipeline to the concourse server use the fly command to set a pipeline.  In the command below replate <LASTNAME> with your lastname.  This will give your pipeline a unique name so as to not collide with the pipelines of others:
+. To deploy this pipeline to the concourse server use the fly command to set a pipeline.  In the command below replace <LASTNAME> with your lastname.  This will give your pipeline a unique name so as to not collide with the pipelines of others:
 +
 [source,bash]
 ---------------------------------------------------------------------

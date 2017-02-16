@@ -2,13 +2,27 @@
 
 == Introduce Git Resource
 
-. Modify the file pipeline.yml that you previously created.  In this step we are creating a job within a pipeline, rather than running a one-off task:
+. Modify the file pipeline.yml that you previously created.  Add the following text, which refers to a Git repository you created in the pre-reqs section, to the top of your file:
 +
 [source, bash]
+---------------------------------------------------------------------
+resources:
+- name: git-assets
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/azwickey-pivotal/concourse-workshop
+---------------------------------------------------------------------
+
+. Modify the previous "hello" job in the jobs section of the file to add a new task to the pipeline that will GET the git repository:
++
+[source,bash]
 ---------------------------------------------------------------------
 jobs:
 - name: hello
   plan:
+  - get: git-assets   # Lines to add
+    trigger: true     # Lines to add
   - task: howdy
     config:
       platform: linux
@@ -20,48 +34,46 @@ jobs:
         args: ["Hello, My first pipeline!"]
 ---------------------------------------------------------------------
 
-. To deploy this pipeline to the concourse server use the fly command to set a pipeline.  In the command below replate <LASTNAME> with your lastname.  This will give your pipeline a unique name so as to not collide with the pipelines of others:
+. Your full pipeline file should look like this:
++
+[source,bash]
+---------------------------------------------------------------------
+resources:
+- name: git-assets
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/azwickey-pivotal/concourse-workshop
+
+jobs:
+- name: hello
+  plan:
+  - get: git-assets
+    trigger: true
+  - task: howdy
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: ubuntu}
+      run:
+        path: echo
+        args: ["Hello, My first pipeline!"]
+---------------------------------------------------------------------
+
+. Update your pipeline in on the concourse server with the set-pipeline command.  As before, in the command below replace <LASTNAME> with your lastname.
 +
 [source,bash]
 ---------------------------------------------------------------------
 $ fly -t gcp set-pipeline -p pipeline-<LASTNAME> -c pipeline.yml
-
-jobs:
-  job hello has been added:
-    name: hello
-    plan:
-    - task: howdy
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            repository: ubuntu
-        run:
-          path: echo
-          args:
-          - Hello, My first pipeline!
-          dir: ""
-
-apply configuration? [yN]: y
-pipeline created!
-you can view your pipeline here: http://concourse.cloud.zwickey.net:8080/teams/main/pipelines/pipeline-zwickey
-
-the pipeline is currently paused. to unpause, either:
-  - run the unpause-pipeline command
-  - click play next to the pipeline in the web ui
 ---------------------------------------------------------------------
 
-. You'll note the command informs us that initially our pipeline is in a paused state.  We could unpause from the commandline, but instead we'll unpause and execute the pipeline from the Concourse web UI.  In a browser navigate to http://concourse.run.cloud.zwickey.net/ and click the "login" link in the upper right corner.
+. You'll note that when you update a pipeline the fly CLI response will highlight what has changed in the pipeline.
 
-. Select the "main" team to login to and use the credentials previously provided to authenticate
+. Return back to the Concourse Web UI.  You'll note your pipeline has now changed to include the git-assets resource, which is an input to your pipeline:
 +
-image::login.png[]
+image::resource.png[]
 
-. Expand the list of pipelines by clicking the menu icon in the upper left.  You should see you pipeline listed with a blue play button.  Click that button to unpause your pipeline:
+. Your pipeline will now trigger automatically anytime the git repository changes.  This is because we marked the _get_ task in the pipeline to be triggered.  By clicking on the hello job you should now see the output of both a git clone and execution of the task that outputs a simple message to STDOUT:
 +
-image::play.png[]
-
-. Lastly, click on your pipeline and then click on and large box that says "hello" in the center of the screen.  Hello is the name of your job.  After selecting your job click the + sign in the upper right to kickoff the job.
-+
-image::execute-lab01.png[]
+image::lab03-execute.png[]
