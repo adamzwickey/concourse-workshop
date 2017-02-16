@@ -1,19 +1,23 @@
-= Prerequisites For Labs
+= Lab 01
 
-== Install FLY CLI
+== World’s simplest Concourse Task
 
-. Browse to http://concourse.run.cloud.zwickey.net/ and select the icon associated with your platform:
+. Using a text editor (of choice), create the file pipeline.yml:
 +
-image::fly.png[]
+[source, bash]
+---------------------------------------------------------------------
+platform: linux
+image_resource:
+  type: docker-image
+  source: {repository: ubuntu}
+run:
+  path: echo
+  args: ["Hello, My first pipeline!"]
+---------------------------------------------------------------------
 
-. Add the downloaded binary to your system path
-
-. After adding to your system path you should be able to execute the fly command from a terminal window:
+. To execute the concourse task on your local workstation execute the following fly command:
 +
 [source,bash]
 ---------------------------------------------------------------------
-$ fly -version                                                                                                                                  1 ↵
-2.6.0
+$ fly -t gcp execute -c pipeline.yml
 ---------------------------------------------------------------------
-
-== Target and Login to Concourse env
