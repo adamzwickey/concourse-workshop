@@ -11,7 +11,7 @@ Presentation ::
 Labs::
  * link:labs/pre-reqs.adoc[_Setup Environment Pre-reqs_]
  * link:labs/lab01.adoc[_World’s simplest Concourse Task_]
- * link:lab.adoc[_1st Job on Concourse server_]
+ * link:labs/lab02.adoc[_1st Job on Concourse Server_]
  * link:lab.adoc[_Introduce Git resource_]
  * link:lab.adoc[_Link multiple jobs_]
  * link:lab.adoc[_Push app to CF_]
