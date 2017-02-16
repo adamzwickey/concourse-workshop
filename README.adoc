@@ -13,6 +13,6 @@ Labs::
  * link:labs/lab01.adoc[_World’s simplest Concourse Task_]
  * link:labs/lab02.adoc[_1st Job on Concourse Server_]
  * link:labs/lab03.adoc[_Introduce Git Resource_]
- * link:labs/lab04.adoc[_Link Multiple Jobs_]
+ * link:labs/lab04.adoc[_Modularize Tasks and Link Multiple Jobs_]
  * link:labs/lab05.adoc[_SSH into a Concourse task to debug on server_]
  * link:labs/lab06.adoc[_Push app to CF_]

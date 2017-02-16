@@ -1,6 +1,6 @@
 = Lab 04
 
-== Link Multiple Jobs
+== Modularize Tasks and Link Multiple Jobs
 
 . Modify the file pipeline.yml that you previously created.  Add the following text, which refers to a Git repository you created in the pre-reqs section, to the top of your file:
 +
