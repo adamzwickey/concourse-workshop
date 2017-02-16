@@ -2,78 +2,35 @@
 
 == Modularize Tasks and Link Multiple Jobs
 
-. Modify the file pipeline.yml that you previously created.  Add the following text, which refers to a Git repository you created in the pre-reqs section, to the top of your file:
+. It is very common within an application's git repository to place all concourse artifacts in a _ci_ folder.  Within that folder individual tasks are modularized in their own yml files and refer to shell scripts for actual task execution.  E.G.
 +
 [source, bash]
 ---------------------------------------------------------------------
-resources:
-- name: git-assets
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/azwickey-pivotal/concourse-workshop
+App Git Repo Root:
+├── App source code....
+│   ├── Some code artifacts...
+├── ci
+│   ├── pipeline.yml
+│   ├── credentials.yml
+│   ├── tasks
+│   │   ├── modular-task.yml
+│   │   ├── modular-task.sh
 ---------------------------------------------------------------------
++
+We will mimic that structure as we build out our pipeline
 
-. Modify the previous "hello" job in the jobs section of the file to add a new task to the pipeline that will GET the git repository:
+. Create the _ci_ and _ci/tasks_ directory structure:
 +
 [source,bash]
 ---------------------------------------------------------------------
-jobs:
-- name: hello
-  plan:
-  - get: git-assets   # Lines to add
-    trigger: true     # Lines to add
-  - task: howdy
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source: {repository: ubuntu}
-      run:
-        path: echo
-        args: ["Hello, My first pipeline!"]
+$ mkdir -p ci/tasks
 ---------------------------------------------------------------------
 
-. Your full pipeline file should look like this:
+. Move the pipeline.yml file into your new _ci_ directory
 +
 [source,bash]
 ---------------------------------------------------------------------
-resources:
-- name: git-assets
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/azwickey-pivotal/concourse-workshop
-
-jobs:
-- name: hello
-  plan:
-  - get: git-assets
-    trigger: true
-  - task: howdy
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source: {repository: ubuntu}
-      run:
-        path: echo
-        args: ["Hello, My first pipeline!"]
+$ mv pipeline.yml ci/pipeline.yml
 ---------------------------------------------------------------------
 
-. Update your pipeline in on the concourse server with the set-pipeline command.  As before, in the command below replace <LASTNAME> with your lastname.
-+
-[source,bash]
----------------------------------------------------------------------
-$ fly -t gcp set-pipeline -p pipeline-<LASTNAME> -c pipeline.yml
----------------------------------------------------------------------
-
-. You'll note that when you update a pipeline the fly CLI response will highlight what has changed in the pipeline.
-
-. Return back to the Concourse Web UI.  You'll note your pipeline has now changed to include the git-assets resource, which is an input to your pipeline:
-+
-image::resource.png[]
-
-. Your pipeline will now trigger automatically anytime the git repository changes.  This is because we marked the _get_ task in the pipeline to be triggered.  By clicking on the hello job you should now see the output of both a git clone and execution of the task that outputs a simple message to STDOUT:
-+
-image::lab03-execute.png[]
+. 
