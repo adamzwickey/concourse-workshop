@@ -9,7 +9,7 @@ Presentation ::
  * Intro to Concourse: link:presentation/concourse.pptx[_Concourse Intro_]
 
 Labs::
- * link:labs/pre-reqs.adoc[_Setup Environemtn Pre-reqs_]
+ * link:labs/pre-reqs.adoc[_Setup Environment Pre-reqs_]
  * link:labs/lab01.adoc[_World’s simplest Concourse Task_]
  * link:lab.adoc[_1st Job on Concourse server_]
  * link:lab.adoc[_Introduce Git resource_]
