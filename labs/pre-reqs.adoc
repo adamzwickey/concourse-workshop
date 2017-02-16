@@ -1,23 +1,37 @@
-= Lab 01
+= Prerequisites For Labs
 
-== World’s simplest Concourse Task
+== Install FLY CLI
 
-. Using a text editor (of choice), create the file pipeline.yml:
+. Browse to http://concourse.run.cloud.zwickey.net/ and select the icon associated with your platform:
 +
-[source, bash]
----------------------------------------------------------------------
-platform: linux
-image_resource:
-  type: docker-image
-  source: {repository: ubuntu}
-run:
-  path: echo
-  args: ["Hello, My first pipeline!"]
----------------------------------------------------------------------
+image::fly.png[]
 
-. To execute the concourse task on your local workstation execute the following fly command:
+. Add the downloaded binary to your system path
+
+. After adding to your system path you should be able to execute the fly command from a terminal window:
 +
 [source,bash]
 ---------------------------------------------------------------------
-$ fly -t gcp execute -c pipeline.yml
+$ fly -version                                                                                                                                  1 ↵
+2.6.0
+---------------------------------------------------------------------
+
+== Target and Login to Concourse env
+
+. Execute the fly target command to connect to the Concourse environment.  When prompted to a username and password enter the credentials provided to you by your instructor.
++
+[source,bash]
+---------------------------------------------------------------------
+$ fly --target gcp login --concourse-url http://concourse.cloud.zwickey.net:8080 --team-name Main
+---------------------------------------------------------------------
+
+. Execute the fly login command, entering the credentials again when prompted.
++
+[source,bash]
+---------------------------------------------------------------------
+$ fly -t gcp login                                                                                                                              1 ↵
+username: admin
+password:
+
+target saved
 ---------------------------------------------------------------------
