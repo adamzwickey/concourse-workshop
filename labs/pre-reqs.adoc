@@ -2,7 +2,7 @@
 
 == Install FLY CLI
 
-. Browse to http://concourse.run.cloud.zwickey.net/ and select the icon associated with your platform:
+. In a browser navigate to http://concourse.run.cloud.zwickey.net/ and select the icon associated with your platform:
 +
 image::fly.png[]
 
