@@ -1,0 +1,6 @@
+---
+applications:
+- name: concourse-demo-boot
+  memory: 512M
+  instances: 1
+  buildpack: java_buildpack_offline
