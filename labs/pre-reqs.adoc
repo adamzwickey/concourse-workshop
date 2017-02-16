@@ -16,7 +16,7 @@ $ fly -version                                                                  
 2.6.0
 ---------------------------------------------------------------------
 
-== Target and Login to Concourse env
+== Target and Login to Concourse Env
 
 . Execute the fly target command to connect to the Concourse environment.  When prompted to a username and password enter the credentials provided to you by your instructor.
 +
