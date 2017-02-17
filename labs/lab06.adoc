@@ -97,3 +97,11 @@ image::cf.png[]
 . Since we didn't modify anything in git our build will not be triggered.  Manually select a task and kick it off.  The end result should be a push of your application to cloudfoundry.
 +
 image::cf1.png[]
+
+. You can verify your application is working by hitting the version /endpoint in your applicaion.  E.G.:
++
+[source,bash]
+---------------------------------------------------------------------
+$ curl http://concourse-demo-boot.apps.cloud.zwickey.net/version
+0.0.9-SNAPSHOT
+---------------------------------------------------------------------
