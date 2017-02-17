@@ -96,4 +96,4 @@ image::cf.png[]
 
 . Since we didn't modify anything in git our build will not be triggered.  Manually select a task and kick it off.  The end result should be a push of your application to cloudfoundry.
 +
-image::cf.png[]
+image::cf1.png[]
