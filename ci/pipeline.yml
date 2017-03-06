@@ -1,0 +1,15 @@
+resources:
+- name: git-assets
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/azwickey-pivotal/concourse-workshop.git
+
+jobs:
+- name: unit-test
+  public: true
+  plan:
+  - get: git-assets
+    trigger: true
+  - task: mvn-test
+    file: git-assets/ci/tasks/mvn-test.yml
