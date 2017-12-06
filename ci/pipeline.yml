@@ -6,16 +6,10 @@ resources:
     uri: https://github.com/azwickey-pivotal/concourse-workshop
 
 jobs:
-- name: hello
+- name: unit-test
+  public: true
   plan:
   - get: git-assets
     trigger: true
-  - task: howdy
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source: {repository: ubuntu}
-      run:
-        path: echo
-        args: ["Hello, My first pipeline!"]
+  - task: mvn-test
+    file: git-assets/ci/tasks/mvn-test.yml

@@ -14,4 +14,4 @@ outputs:
 - name: app-output
 
 run:
-  path: git-assets/concourse-workshop/ci/tasks/package.sh
+  path: git-assets/ci/tasks/package.sh
